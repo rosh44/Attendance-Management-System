@@ -9,7 +9,7 @@
 This system automates the attendance and defaulter management process through scanned attendance sheets using image processing, storing data in an Excel sheet, and automatically emailing defaulters about their attendance.
 
 ## Report Summary
-The project was undertaken at K. J. Somaiya College of Engineering, Mumbai, under the guidance of Ms. Suchitra Patil (suchitrapatil@somaiya.edu).
+The project was undertaken at K. J. Somaiya College of Engineering, Mumbai, under the guidance of Ms. Suchitra Patil.
 
 ### Modules
 1. **Attendance Counting**: Adds attendance from scanned sheets into an Excel file.
