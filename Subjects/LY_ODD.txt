@@ -1,0 +1,4 @@
+STQA
+SM
+AI
+BDA

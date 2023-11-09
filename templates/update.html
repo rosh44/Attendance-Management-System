@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Update Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  <link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+  
+      <link rel="stylesheet" href="{{ url_for('static',filename='styles/css/style1.css') }}">
+  	{% if pop=="done" %}
+	<script>
+	alert('Sheet {{sheet}} Updated');
+	</script>
+	{% endif %}
+</head>
+
+<body>
+
+{% if error_msg %}
+<p align="center"><strong>{{ error_msg }}</strong></p>
+{% endif %}
+
+
+<div class="container">
+<h2 align=center> Update Attendance </h2>
+<form action="/sendmail"  method="POST" enctype="multipart/form-data">
+      
+      <h4>Year</h4>
+        <div class="input-group" >
+          <input type="radio" name="year" value="SY" id="se" />
+          <label for="se">SE</label>
+          <input type="radio" name="year" value="TY" id="te"/>
+          <label for="te">TE</label>
+		   <input type="radio" name="year" value="LY" id="be"/>
+          <label for="be">BE</label>
+        </div>
+		
+		
+		
+    <div class="row">
+      <div class="col-half">
+        <h4>Semester</h4>
+        <div class="input-group" style="width:200%">
+          <select name="sem" onchange="javascript: dynamicdropdown(this.options[this.selectedIndex].value);" id="semester" required>
+     <option value="" >Select Semester</option>
+    <option value="ODD">Odd</option>
+
+     <option value="EVEN">Even</option>
+            </select>
+		        </div>
+      </div>
+	  
+      <div class="col-half">
+        <h4>Division</h4>
+        <div class="input-group">
+          <input type="radio" name="division" value="A" required id="div1"/>
+          <label for="div1">A</label>
+          <input type="radio" name="division" value="B"  id="div2"/>
+          <label for="div2">B</label>
+        </div>
+      </div>
+    </div>
+   
+    <div class="row" >
+	<div class="col-half">
+      <h4>Month and Year</h4>
+      <div class="input-group" >
+        <input type="month"  name="m&y" id = "m$y" required/>
+         </div>
+    </div>
+
+	<div class="col-half">
+	<h4>Subject</h4>
+	<div class="input-group" style="width:200%">
+	<select name="subj" id="sub" required>
+</select>
+</div>
+</div>
+</div>
+
+     <div class="row" >
+	<div class="col-half">
+    <h4>Front Images</h4> 
+	<div class="input-group" >
+	<input type="file" name="file1" id="fileupload" multiple required> 
+</div>
+</div>
+	<div class="col-half">
+    <h4>Back Images</h4> 
+	<div class="input-group" >
+	<input type="file" name="file2" id="fileupload" multiple required>
+  </div>
+	</div>
+	</div>
+	 <div class="row" style="text-align:center">
+      
+       <input type="submit" name="action" value="Generate Excel" class="btn btn-success" style="padding: 1em; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 15px;    color: #fff;
+  border-color: #64ac15; text-align:center;  background-color: #7ed321">
+    </div>
+
+	
+  </form>
+</div>
+
+<script>
+	
+    var key=[{{sy_odd|tojson}},{{sy_even|tojson}},{{ty_odd|tojson}},{{ty_even|tojson}},{{ly_odd|tojson}},{{ly_even|tojson}}];
+    function dynamicdropdown(listindex) {
+        var x="";
+        if (document.getElementById('se').checked) {
+            x = document.getElementById('se').value;
+        }
+        if (document.getElementById('te').checked) {
+            x = document.getElementById('te').value;
+        }
+        if (document.getElementById('be').checked) {
+            x = document.getElementById('be').value;
+        }
+        var s=x+"_"+listindex;
+         
+         document.getElementById("sub").length = 0;
+		 document.getElementById("sub").options[0]=new Option("Select Subject","");
+         switch (s) {
+             case "SY_ODD" :
+                 for (var i = 1; i <= key[0].length; i++)
+                     document.getElementById("sub").options[i] = new Option(key[0][i-1], i-1);
+                 break;
+             case "SY_EVEN" :
+                 for (var i = 1; i <= key[1].length; i++)
+                     document.getElementById("sub").options[i] = new Option(key[1][i-1], i-1);
+                 break;
+			case "TY_ODD" :
+                 for (var i = 1; i <= key[2].length; i++)
+                     document.getElementById("sub").options[i] = new Option(key[2][i-1], i-1);
+                 break;
+			case "TY_EVEN" :
+                 for (var i = 1; i <= key[3].length; i++)
+                     document.getElementById("sub").options[i] = new Option(key[3][i-1], i-1);
+                 break;
+			case "LY_ODD" :
+                 for (var i = 1; i <= key[4].length; i++)
+                     document.getElementById("sub").options[i] = new Option(key[4][i-1], i-1);
+                 break;
+             case "LY_EVEN" :
+                 for (var i = 1; i <= key[5].length; i++)
+                     document.getElementById("sub").options[i] = new Option(key[5][i-1], i-1);
+                 break;
+         }
+
+         return true;
+    }
+
+</script>
+</body>

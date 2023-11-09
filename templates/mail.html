@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Mail Sent</h1>
+Sem Selected: {{ semval }}
+<br>
+Year: {{ yr1 }}
+<br>
+Month and year: {{ monyr1 }}
+<br>
+Division: {{ div1 }}
+<br>
+Subject: {{ subj1 }}
+<br>
+<h2>Front pictures</h2>
+{% for f in files %}
+Images Selected: {{ f }}
+<img src="{{ f }}" alt="img" width="100px" height="100px">
+{% endfor %}
+
+<h2>Back pictures</h2>
+{% for f1 in bfiles %}
+Images Selected: {{ f1 }}
+<img src="{{ f1 }}" alt="img" width="100px" height="100px">
+{% endfor%}
+</body>
+</html>
